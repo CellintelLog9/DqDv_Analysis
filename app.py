@@ -45,11 +45,11 @@ zone_summary = pd.DataFrame({
 })
 
 # Sort the zone summary by capacity and filter zones with capacity less than 40 Ah
-zone_summary = zone_summary.sort_values(by='Capacity(Ah)', ascending=False)
-zone_summary = zone_summary[zone_summary['Capacity(Ah)'] < 39]
+zone_summary = zone_summary.sort_values(by='Capacity(Ah) added in each charging session', ascending=False)
+zone_summary = zone_summary[zone_summary['Capacity(Ah) added in each charging session'] < 39]
 
 st.subheader("Zone Summary")
-zone_summary = zone_summary.sort_values(by='Capacity(Ah)', ascending=False)
+zone_summary = zone_summary.sort_values(by='Capacity(Ah) added in each charging session', ascending=False)
 st.dataframe(zone_summary)
 
 # Filter charging_data to include only the filtered zones
