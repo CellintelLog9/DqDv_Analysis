@@ -17,9 +17,10 @@ def load_data():
 charging_data = load_data()
 
 # Data Preprocessing
-# charging_data['Timestamp'] = pd.to_datetime(charging_data['Timestamp'], errors='coerce')
-# charging_data = charging_data.dropna(subset=['Timestamp'])
-# charging_data = charging_data.sort_values(by='Timestamp').reset_index(drop=True)
+charging_data['Timestamp'] = pd.to_datetime(charging_data['Timestamp'], format='%d-%m-%y %H:%M')
+charging_data = charging_data.dropna(subset=['Timestamp'])
+
+charging_data = charging_data.sort_values(by='Timestamp').reset_index(drop=True)
 
 # Calculate capacity and timestamps for each zone
 zone_capacity = []
