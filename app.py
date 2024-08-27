@@ -10,16 +10,16 @@ st.title("SOH Test Cyclewise Analysis")
 # Automatically load the CSV file from the GitHub repository
 @st.cache_data
 def load_data():
-    url = "https://raw.githubusercontent.com/CellintelLog9/DqDv_Analysis/main/soh_test_cyclewise.csv"
+    url = "https://raw.githubusercontent.com/CellintelLog9/DqDv_Analysis/main/dqdv_2w.csv"
     return pd.read_csv(url)
 
 # Load the data
 charging_data = load_data()
 
 # Data Preprocessing
-charging_data['Timestamp'] = pd.to_datetime(charging_data['Timestamp'], errors='coerce')
-charging_data = charging_data.dropna(subset=['Timestamp'])
-charging_data = charging_data.sort_values(by='Timestamp').reset_index(drop=True)
+# charging_data['Timestamp'] = pd.to_datetime(charging_data['Timestamp'], errors='coerce')
+# charging_data = charging_data.dropna(subset=['Timestamp'])
+# charging_data = charging_data.sort_values(by='Timestamp').reset_index(drop=True)
 
 # Calculate capacity and timestamps for each zone
 zone_capacity = []
@@ -80,8 +80,8 @@ def process_data_for_zones(df, matched_array):
 
 # Define your matched array
 charge_matched_array = np.array([0.2, 0.3])
-processed_df = process_data_for_zones(charging_data, charge_matched_array)
-
+# processed_df = process_data_for_zones(charging_data, charge_matched_array)
+processed_df=charging_data.copy()
 # Zone selection
 st.sidebar.subheader("Select Zones to Plot")
 all_zones = processed_df['zone'].unique()
