@@ -48,6 +48,10 @@ zone_summary = pd.DataFrame({
 zone_summary = zone_summary.sort_values(by='Capacity(Ah)', ascending=False)
 zone_summary = zone_summary[zone_summary['Capacity(Ah)'] < 39]
 
+st.subheader("Zone Summary")
+zone_summary = zone_summary.sort_values(by='Capacity(Ah)', ascending=False)
+st.dataframe(zone_summary)
+
 # Filter charging_data to include only the filtered zones
 charging_data = charging_data[charging_data['zone'].isin(zone_summary['Zone'])]
 
