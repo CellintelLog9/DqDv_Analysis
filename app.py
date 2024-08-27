@@ -5,7 +5,7 @@ from scipy.ndimage import gaussian_filter1d
 import plotly.express as px
 
 # Title of the app
-st.title("SOH Test Cyclewise Analysis")
+st.title("DQDV Test Zone Analysis")
 
 # Automatically load the CSV file from the GitHub repository
 @st.cache_data
@@ -39,7 +39,7 @@ for zone in charging_data['zone'].unique():
 # Create a DataFrame to store the results
 zone_summary = pd.DataFrame({
     'Zone': charging_data['zone'].unique(),
-    'Capacity(Ah)': zone_capacity,
+    'Capacity(Ah) added in each charging session': zone_capacity,
     'Start Timestamp': zone_start_time,
     'End Timestamp': zone_end_time
 })
@@ -100,6 +100,16 @@ filtered_df = processed_df[processed_df['zone'].isin(selected_zones)]
 
 # Plotting
 st.subheader("Voltage vs dQ/dV by Selected Zones")
+csv_data = charging_data.to_csv(index=False)
+
+# Add a download button for the original CSV file
+st.download_button(
+    label="Download Original CSV",
+    data=csv_data,
+    file_name='2w_jayesh.csv',
+    mime='text/csv'
+)
+
 if not filtered_df.empty:
     fig = px.line(filtered_df, x='Voltage', y='dqdv', color='zone', title='Voltage vs dQ/dV by Selected Zones')
     st.plotly_chart(fig)
