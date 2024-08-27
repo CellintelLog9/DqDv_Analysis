@@ -15,7 +15,7 @@ def load_data():
 
 # Load the data
 charging_data = load_data()
-
+charging_data.info()
 # Data Preprocessing
 charging_data['Timestamp'] = pd.to_datetime(charging_data['Timestamp'], format='%d-%m-%y %H:%M')
 charging_data = charging_data.dropna(subset=['Timestamp'])
