@@ -91,15 +91,30 @@ charge_matched_array = np.array([0.2, 0.3])
 processed_df = process_data_for_zones(charging_data, charge_matched_array)
 
 # Zone selection
+
+
+
 st.sidebar.subheader("Select Zones to Plot")
 all_zones = processed_df['zone'].unique()
-selected_zones = st.sidebar.multiselect("Select Zones", options=all_zones, default=all_zones[:3])
+default_zones = [600, 583, 692]  # Default selected zones
+
+selected_zones = st.sidebar.multiselect(
+    "Select Zones", 
+    options=all_zones, 
+    default=default_zones
+)
+
+
 
 # Filter the processed_df based on the selected zones
 filtered_df = processed_df[processed_df['zone'].isin(selected_zones)]
 
 # Plotting
 st.subheader("Voltage vs dQ/dV by Selected Zones")
+st.markdown("""
+- Slow Charging
+- Temp between 23 and 37
+""")
 csv_data = charging_data.to_csv(index=False)
 
 # Add a download button for the original CSV file
